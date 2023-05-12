@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
         if (typeof window !== 'undefined') {
             setToken(localStorage.getItem("token"));
         }
-    }, [])
+    }, [token])
   return (
     <>
       <Navbar />

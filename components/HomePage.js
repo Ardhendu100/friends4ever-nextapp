@@ -1,35 +1,30 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 function HomePage(props) {
     const [postDetails, setPostDetails] = useState([]);
-    const { token } = props;
+    // const { token } = props;
+    const [token, setToken] = useState("");
 
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        if (typeof window !== 'undefined') {
+            setToken(localStorage.getItem("token"));
+        }
+        console.log(token)
+        if (token) {
+            fetchData();
+        }
+    }, [token]);
 
     const options = {
-        method: 'GET', 
-        headers: {
-            'Authorization': 'Bearer ' + token, 
-            'Content-Type': 'application/json'
-        },
+        method: 'GET',
     };
     async function fetchData() {
         console.log(token)
-        const response = await fetch('http://127.0.0.1:8000/api/posts',options);
+        const response = await fetch('http://127.0.0.1:8000/api/posts', options);
         console.log(response)
-        // const data = await response.json();
-        // setPostDetails(data);
-    }
-    // const res = await fetch('http://127.0.0.1:8000/api/posts', {
-    //     method: "GET",
-    // });
 
-    // // const data = await res.json();
-    // console.log("jkdvbk");
+    }
     return (
         <>
             <div className="flex justify-center mt-5">
